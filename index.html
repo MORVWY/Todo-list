@@ -24,69 +24,74 @@
     <main class="app">
 
         <section class="app-greeting greeting">
-            <h2 class="greeting__item">What's up, <input type="text" id="greeting__item-userName"
-                    placeholder="Name here">!</h2>
+            <h2 class="greeting__item">What's up, <input type="text" class="greeting__item-userName"
+                    placeholder="Name here"></h2>
         </section>
 
         <section class="app-creation creation">
 
             <h3 class="creation__title">CREATE A TODO</h3>
 
-            <form id="creation__todo-form todo-form">
+            <div class="creation__todo todo">
 
-                <h4 class="todo-form__title">What's on your todo list?</h4>
-                <input type="text" name="todo-form__content" id="todo-form__content" placeholder="e.g. cook dinner">
+                <div class="todo-category">
+                    <div class="todo-category__create">
+                        <h4 class="todo-category__create-title">Pick or add a category</h4>
 
-                <h4 class="todo-form__category">Pick a category</h4>
-                <div class="todo-form__options">
-                    <label class="todo-form__label">
-                        <input type="radio" name="todo-form__label-category" id="todo-form__label-business"
-                            value="business">
-                        <span class="todo-form__label-bubble todo-form__label-business"></span>
-                        <div class="todo-form__label-title">Business</div>
-                    </label>
+                        <input type="text" name="todo-category__create-add" class="todo-category__create-add"
+                            placeholder="e.g. Sport">
 
-                    <label class="todo-form__label">
-                        <input type="radio" name="todo-form__label-category" id="todo-form__label-personal"
-                            value="personal">
-                        <span class="todo-form__label-bubble todo-form__label-personal"></span>
-                        <div class="todo-form__label-title">Personal</div>
-                    </label>
-                </div>
-
-                <input type="submit" id="todo-form__submit" value="Add Todo">
-            </form>
-
-        </section>
-
-        <section class="app-todo todo">
-            <h3 class="todo-header">TODO LIST</h3>
-            <div class="todo-list">
-                <div class="todo__list-item">
-                    <label>
-                        <input type="checkbox">
-                        <span class=""></span>
-                    </label>
-
-                    <div class="todo-list__content">
-                        <input type="text" value="Make a video" readonly>
+                        <button class="todo-category__create-button">Add category</button>
                     </div>
 
-                    <div class="todo-list__actions">
-                        <button class="todo-list__actions-edit">Edit</button>
-                        <button class="todo-list__actions-delete">Delete</button>
+                    <form class="todo-category__options">
+                        <label class="todo-category__item">
+                            <input type="radio" name="todo-category__item-category" class="todo-category__item-category"
+                                value="business">
+                            <div class="todo-category__item-title">Business</div>
+                        </label>
+                    </form>
+                </div>
+
+                <div class="todo-main">
+                    <div class="todo-add">
+                        <h4 class="todo-add__title">What's on your todo list?</h4>
+                        <input type="text" name="todo-add__content" class="todo-add__content"
+                            placeholder="e.g. Get some milk">
+
+                        <button class="todo-add__submit">Add todo</button>
+                    </div>
+
+                    <div class="todo-list">
+                        <h3 class="todo-list__header">TODO LIST</h3>
+                        <div class="todo-list__item">
+                            <label>
+                                <input type="checkbox">
+                            </label>
+
+                            <div class="todo-list__item-content">
+                                <input type="text" value="Make a video" readonly>
+                            </div>
+
+                            <div class="todo-list__item-actions">
+                                <button class="todo-list__item-actionsEdit">Edit</button>
+                                <button class="todo-list__item-actionsDelete">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </section>
 
-        <footer class="app-logo logo">
-            <h1 class="logo-item">Todo List</h1>
-            <div class="logo-credits">Created by <a href="https://github.com/MORVWY"
-                    class="logo-credits__link">MORVWY</a></div>
-        </footer>
+        </section>
 
     </main>
+
+    <footer class="logo">
+        <h1 class="logo-item">Todo List</h1>
+        <div class="logo-credits">Created by <a href="https://github.com/MORVWY" class="logo-credits__link">MORVWY</a>
+        </div>
+    </footer>
 
     <script src="js/app.js"></script>
 </body>
