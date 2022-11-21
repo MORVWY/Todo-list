@@ -22,8 +22,7 @@
         <section class="app-category category">
 
             <div class="category-add">
-                <input type="text" class="category-add__name" name="category-add__name"
-                    placeholder="e.g. Drink some milk">
+                <input type="text" class="category-add__name" name="category-add__name" placeholder="e.g. Sport">
                 <div class="category-add__item">+</div>
             </div>
 
@@ -34,6 +33,7 @@
                 </div>
 
                 <div class="category-list__item">
+                    <input type="radio" name="category-list__item-name">
                     <input type="text" class="category-list__item-name" name="category-list__item-name"
                         value="Hello world" readonly>
                     <div class="category-list__item-buttons">
@@ -42,11 +42,33 @@
                     </div>
                 </div>
 
+
             </div>
 
         </section>
 
         <section class="app-todo todo">
+
+            <div class="todo-header">
+
+                <div class="todo-header__greeting greeting">
+                    <h1 class="greeting-header">What's up,</h1>
+                    <input type="text" name="greeting-item"
+                            class="greeting-item" placeholder="enter your name">
+                </div>
+
+                <div class="todo-header__add add">
+                    <input type="text" class="add-form" name="add-form" placeholder="e.g. Drink some milk">
+                    <div class="add-item">+</div>
+                </div>
+
+            </div>
+
+            <div class="todo-title">
+                <div class="todo-title__header">Your Todo category:</div>
+                <span class="todo-title__item">Sport</span>
+                <hr class="todo-title__line">
+            </div>
 
         </section>
 

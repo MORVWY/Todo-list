@@ -80,6 +80,7 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
                     img {
                         width: 25px;
                         height: 25px;
@@ -144,5 +145,107 @@ body {
 
     .todo {
         flex-basis: 80%;
+        padding: 2rem;
+
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .greeting {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                &-header {
+                    color: var(--main-dark-bg-color);
+                    font-size: 2rem;
+                    font-weight: 700;
+                }
+
+                &-item {
+                    margin-left: 1rem;
+                    background-color: var(--main-light-bg-color);
+                    border: none;
+                    font-size: 2rem;
+                    outline: none;
+                    color: var(--main-dark-bg-color);
+                    font-weight: 700;
+                }
+            }
+
+            .add {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: var(--main-dark-bg-color);
+                padding: 1rem;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow);
+                bottom: 10px;
+
+                input[type=text] {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    color: var(--main-light-bg-color);
+                }
+
+                &-form {
+                    flex: 1;
+                    border: none;
+                    background-color: var(--main-dark-bg-color);
+                    outline: none;
+                    width: 75%;
+                }
+
+                &-item {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 2px solid;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 25px;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    color: var(--teal-color);
+
+                    &:hover {
+                        cursor: pointer;
+                        opacity: .5;
+                        transition: .5s;
+                    }
+                }
+            }
+        }
+
+        &-title {
+            margin-top: 100px;
+
+            &__header {
+                display: inline-block;
+                color: var(--main-dark-bg-color);
+                font-size: 2rem;
+                font-weight: 500;
+                opacity: .75;
+            }
+
+            &__item {
+                background-color: var(--main-light-bg-color);
+                color: var(--main-dark-bg-color);
+                font-size: 2rem;
+                font-weight: 500;
+            }
+
+            &__line {
+                border: none;
+                border-bottom: 2px solid;
+                border-radius: 100px;
+                color: var(--main-dark-bg-color);
+                box-shadow: var(--shadow);
+            }
+        }
     }
 }

@@ -169,4 +169,124 @@ body {
 .app .todo {
   -ms-flex-preferred-size: 80%;
       flex-basis: 80%;
+  padding: 2rem;
+}
+.app .todo-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.app .todo-header .greeting {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.app .todo-header .greeting-header {
+  color: var(--main-dark-bg-color);
+  font-size: 2rem;
+  font-weight: 700;
+}
+.app .todo-header .greeting-item {
+  margin-left: 1rem;
+  background-color: var(--main-light-bg-color);
+  border: none;
+  font-size: 2rem;
+  outline: none;
+  color: var(--main-dark-bg-color);
+  font-weight: 700;
+}
+.app .todo-header .add {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--main-dark-bg-color);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  bottom: 10px;
+}
+.app .todo-header .add input[type=text] {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--main-light-bg-color);
+}
+.app .todo-header .add-form {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: none;
+  background-color: var(--main-dark-bg-color);
+  outline: none;
+  width: 75%;
+}
+.app .todo-header .add-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 2px solid;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--teal-color);
+}
+.app .todo-header .add-item:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.app .todo-title {
+  margin-top: 100px;
+}
+.app .todo-title__header {
+  display: inline-block;
+  color: var(--main-dark-bg-color);
+  font-size: 2rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+.app .todo-title__item {
+  background-color: var(--main-light-bg-color);
+  color: var(--main-dark-bg-color);
+  font-size: 2rem;
+  font-weight: 500;
+}
+.app .todo-title__line {
+  border: none;
+  border-bottom: 2px solid;
+  border-radius: 100px;
+  color: var(--main-dark-bg-color);
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
 }
