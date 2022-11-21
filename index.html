@@ -2,82 +2,43 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Todo list</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;500;700&family=Teko:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
 
 <body>
+
     <main class="app">
 
-        <section class="app-greeting greeting">
-            <h2 class="greeting__item">What's up, <input type="text" class="greeting__item-userName"
-                    placeholder="Name here"></h2>
-        </section>
+        <section class="app-category category">
 
-        <section class="app-creation creation">
+            <div class="category-add">
+                <input type="text" class="category-add__name" name="category-add__name"
+                    placeholder="e.g. Drink some milk">
+                <div class="category-add__item">+</div>
+            </div>
 
-            <h3 class="creation__title">CREATE A TODO</h3>
+            <div class="category-list">
 
-            <div class="creation__todo todo">
-
-                <div class="todo-category">
-                    <div class="todo-category__create">
-                        <h4 class="todo-category__create-title">Pick or add a category</h4>
-
-                        <input type="text" name="todo-category__create-add" class="todo-category__create-add"
-                            placeholder="e.g. Sport">
-
-                        <button class="todo-category__create-button">Add category</button>
-                    </div>
-
-                    <form class="todo-category__options">
-                        <label class="todo-category__item">
-                            <input type="radio" name="todo-category__item-category" class="todo-category__item-category"
-                                value="business">
-                            <div class="todo-category__item-title">Business</div>
-                        </label>
-                    </form>
+                <div class="category-list__item">
+                    <div class="category-list__item-all">All todo</div>
                 </div>
 
-                <div class="todo-main">
-                    <div class="todo-add">
-                        <h4 class="todo-add__title">What's on your todo list?</h4>
-                        <input type="text" name="todo-add__content" class="todo-add__content"
-                            placeholder="e.g. Get some milk">
-
-                        <button class="todo-add__submit">Add todo</button>
-                    </div>
-
-                    <div class="todo-list">
-                        <h3 class="todo-list__header">TODO LIST</h3>
-                        <div class="todo-list__item">
-                            <label>
-                                <input type="checkbox">
-                            </label>
-
-                            <div class="todo-list__item-content">
-                                <input type="text" value="Make a video" readonly>
-                            </div>
-
-                            <div class="todo-list__item-actions">
-                                <button class="todo-list__item-actionsEdit">Edit</button>
-                                <button class="todo-list__item-actionsDelete">Delete</button>
-                            </div>
-                        </div>
+                <div class="category-list__item">
+                    <input type="text" class="category-list__item-name" name="category-list__item-name"
+                        value="Hello world" readonly>
+                    <div class="category-list__item-buttons">
+                        <img src="images/edit-icon.png" alt="edit icon" class="edit">
+                        <img src="images/delete-icon.png" alt="delete icon" class="delete">
                     </div>
                 </div>
 
@@ -85,13 +46,12 @@
 
         </section>
 
+        <section class="app-todo todo">
+
+        </section>
+
     </main>
 
-    <footer class="logo">
-        <h1 class="logo-item">Todo List</h1>
-        <div class="logo-credits">Created by <a href="https://github.com/MORVWY" class="logo-credits__link">MORVWY</a>
-        </div>
-    </footer>
 
     <script src="js/app.js"></script>
 </body>
