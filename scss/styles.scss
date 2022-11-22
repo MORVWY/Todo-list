@@ -247,5 +247,59 @@ body {
                 box-shadow: var(--shadow);
             }
         }
+
+        &-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 2rem;
+
+            :nth-child(-n+2) {
+                margin-top: 0;
+            }
+
+
+            &__item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-basis: 48%;
+                background-color: var(--main-dark-bg-color);
+                padding: 1rem;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow);
+                margin-top: 1.5em;
+
+                &-name {
+                    border: none;
+                    background-color: var(--main-dark-bg-color);
+                    outline: none;
+                    width: 65%;
+                }
+
+                input[type=text] {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    color: var(--main-light-bg-color);
+                }
+
+                &-buttons {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 25px;
+                        height: 25px;
+
+                        &:hover {
+                            cursor: pointer;
+                            transition: .5s;
+                            opacity: .5;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
