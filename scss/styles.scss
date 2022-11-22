@@ -172,6 +172,7 @@ body {
                     outline: none;
                     color: var(--main-dark-bg-color);
                     font-weight: 700;
+                    width: 50%;
                 }
             }
 
@@ -222,7 +223,7 @@ body {
         }
 
         &-title {
-            margin-top: 100px;
+            margin-top: 6.25rem;
 
             &__header {
                 display: inline-block;
@@ -242,7 +243,7 @@ body {
             &__line {
                 border: none;
                 border-bottom: 2px solid;
-                border-radius: 100px;
+                border-radius: 6.25rem;
                 color: var(--main-dark-bg-color);
                 box-shadow: var(--shadow);
             }
@@ -253,10 +254,6 @@ body {
             flex-wrap: wrap;
             justify-content: space-around;
             margin-top: 2rem;
-
-            :nth-child(-n+2) {
-                margin-top: 0;
-            }
 
 
             &__item {
@@ -269,6 +266,10 @@ body {
                 border-radius: 1.5rem;
                 box-shadow: var(--shadow);
                 margin-top: 1.5em;
+
+                &:nth-child(-n+2) {
+                    margin-top: 0;
+                }
 
                 &-name {
                     border: none;
@@ -297,6 +298,63 @@ body {
                             transition: .5s;
                             opacity: .5;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .app {
+        .category {
+            display: none;
+        }
+
+        .todo {
+            flex-basis: 100%;
+
+            &-list {
+                &__item {
+                    flex-basis: 100%;
+                    margin-top: 1.25rem !important;
+
+                    &:first-child {
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .app {
+        .todo {
+
+            &-title {
+                margin-top: 3.125rem;
+            }
+
+            &-header {
+                flex-wrap: wrap;
+
+                .greeting {
+                    flex-basis: 100%;
+
+                    &-header {
+
+                    }
+
+                    &-item {
+                    }
+                }
+
+                .add {
+                    flex-basis: 100%;
+                    margin-top: 1.25rem;
+                    &-form {
+                        
                     }
                 }
             }
