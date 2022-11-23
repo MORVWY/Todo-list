@@ -26,6 +26,50 @@ body {
     width: 100%;
     min-height: 100vh;
 
+    // Hamburger
+    .hamburger {
+        position: relative;
+        display: none;
+        width: 35px;
+        cursor: pointer;
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+        z-index: 99;
+    }
+
+    .hamburger .hamburger__bar,
+    .hamburger:after,
+    .hamburger:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 5px;
+        background-color: var(--main-dark-bg-color);
+        margin: 6px 0px;
+        transition: 0.4s;
+    }
+
+    .hamburger.is-active:before {
+        transform: rotate(-45deg) translate(-8px, 6px);
+    }
+
+    .hamburger.is-active:after {
+        transform: rotate(45deg) translate(-9px, -8px);
+    }
+
+    .hamburger.is-active .hamburger__bar {
+        opacity: 0;
+    }
+
+    .display-block {
+        display: block;
+        position: absolute;
+        right: 3%;
+        top: 3%;
+    }
+
     .category {
         border-bottom-right-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
@@ -165,7 +209,7 @@ body {
                 }
 
                 &-item {
-                    margin-left: 1rem;
+                    margin-left: 0.2rem;
                     background-color: var(--main-light-bg-color);
                     border: none;
                     font-size: 2rem;
@@ -314,6 +358,21 @@ body {
         .todo {
             flex-basis: 100%;
 
+            &-header {
+                flex-wrap: wrap;
+
+                .greeting {
+                    flex-basis: 100%;
+                }
+
+                .add {
+                    flex-basis: 100%;
+                    margin-top: 1.25rem;
+
+                    &-form {}
+                }
+            }
+
             &-list {
                 &__item {
                     flex-basis: 100%;
@@ -328,33 +387,88 @@ body {
     }
 }
 
+@media (min-width: 992px) {
+    .hamburger {
+        display: none;
+        visibility: hidden;
+    }
+}
+
 @media (max-width: 768px) {
     .app {
         .todo {
 
             &-title {
                 margin-top: 3.125rem;
+
+                &__header {
+                    font-size: 1.5rem;
+                }
+
+                &__item {
+                    font-size: 1.5rem;
+                }
             }
 
             &-header {
-                flex-wrap: wrap;
 
                 .greeting {
-                    flex-basis: 100%;
 
                     &-header {
-
+                        font-size: 1.5rem;
                     }
 
                     &-item {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .app {
+        .todo {
+
+            &-title {
+
+                &__header {
+                    font-size: 1rem;
+                }
+
+                &__item {
+                    font-size: 1rem;
+                }
+            }
+
+            &-header {
+
+                .greeting {
+
+                    &-header {
+                        font-size: 1rem;
+                    }
+
+                    &-item {
+                        font-size: 1rem;
                     }
                 }
 
                 .add {
-                    flex-basis: 100%;
-                    margin-top: 1.25rem;
-                    &-form {
-                        
+
+                    &-form {}
+
+                    input[type=text] {
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+            &-list {
+                &__item {
+                    input[type=text] {
+                        font-size: 1rem;
                     }
                 }
             }
