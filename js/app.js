@@ -1,9 +1,8 @@
 window.addEventListener('load', () => {
     const nameInput = document.querySelector('.greeting-item'),
-    addTodoForm = document.querySelector('.add-form'),
-    addTodoButton = document.querySelector('.add-item'),
-    todoList = document.querySelector('.todo-list'),
-    todoListItem = document.querySelector('.rodo-list__item');
+        addTaskForm = document.querySelector('.add-form'),
+        addTaskButton = document.querySelector('.add-item'),
+        taskList = document.querySelector('.todo-list');
 
     // Local storage name
 
@@ -14,46 +13,65 @@ window.addEventListener('load', () => {
         localStorage.setItem('userName', e.target.value);
     });
 
-    //
+    // Task DB
 
-    let todoDB = [];
+    const tasks = [];
 
-    addTodoButton.addEventListener('click', () => {
-        if (addTodoForm.value && addTodoForm.value.trim() !== '') {
-            let newTodo = {
-                todo: addTodoForm.value
-            };
-    
-            todoDB.push(newTodo);
-    
-            addTodoForm.value = '';
-            addTodoForm.focus();
-            displayTodos();
-    
-            localStorage.setItem('todo', JSON.stringify(todoDB));
+    // Add task on click
+
+    addTaskButton.addEventListener('click', () => {
+        let taskFormValue = addTaskForm.value;
+
+        if (taskFormValue && taskCopyCheck(taskFormValue, tasks)) {
+            addTask(taskFormValue.trim(), tasks);
+            addTaskForm.value = '';
+            addTaskForm.focus();
+            tasksRender(tasks);
         } else {
-            alert('Incorrect todo task');
-            addTodoForm.value = '';
-            addTodoForm.focus();
+            alert('Enter valid task');
+            addTaskForm.value = '';
+            addTaskForm.focus();
         }
     });
 
-    // Todos localstorage
+    // Add task function
 
-    if (localStorage.getItem('todo')) {
-        todoDB = JSON.parse(localStorage.getItem('todo'));
-        displayTodos();
+    function addTask(text, list) {
+        const timeStamp = Date.now();
+        const task = {
+            id: timeStamp,
+            text,
+            isComplete: false
+        };
+
+        list.push(task);
     }
 
-    //
+    // Check for task dublicate
+    function taskCopyCheck(text, list) {
+        let isNotHave = true;
 
-    function displayTodos() {
-        let displayTodos = '';
+        list.forEach((task) => {
+            if (task.text === text) {
+                alert('Task is already added');
+                isNotHave = false;
+            }
 
-        todoDB.forEach((item) => {
-            displayTodos += `
-            <div class="todo-list__item">
-                    <input type="text" class="todo-list__item-name" name="todo-list__item-name" value="${item.todo.trim()}"
+        });
+
+        return isNotHave;
+    }
+
+    // Show task function
+
+    function tasksRender(list) {
+        let defaultTask = '';
+
+        list.forEach((task) => {
+            defaultTask += `
+            <div class="todo-list__item" id="${task.id}">
+            <input type="checkbox">
+                                <input type="text" class="todo-list__item-name" name="todo-list__item-name" value="${task.text}"
                         readonly>
                     <div class="todo-list__item-buttons">
                         <img src="images/edit-icon.png" alt="edit icon" class="edit-todo">
@@ -62,22 +80,9 @@ window.addEventListener('load', () => {
                 </div>
             `;
 
-            todoList.innerHTML = displayTodos;
+            taskList.innerHTML = defaultTask;
         });
     }
-
-    function deleteTodos(item) {
-        
-        if (item.target.classList.contains('delete-todo')) {
-            todoDB.splice(item.target, 1);
-            localStorage.setItem('todo', JSON.stringify(todoDB));
-            displayTodos();
-            console.log(todoDB);
-        }
-    }
-
-    todoList.addEventListener('click', deleteTodos);
-
 
 
     // const hamb = document.querySelector('.hamburger');
