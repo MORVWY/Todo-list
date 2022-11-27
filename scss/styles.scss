@@ -326,6 +326,7 @@ body {
                     font-size: 1.2rem;
                     font-weight: 500;
                     color: var(--main-light-bg-color);
+                    margin-left: -5rem;
                 }
 
                 &-buttons {
@@ -351,7 +352,27 @@ body {
             }
         }
     }
+
+    .rotate-addButton {
+        animation: rotation .5s 1 linear;
+    }
+
+    .complete {
+        text-decoration: line-through;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+    
+        to {
+            transform: rotate(180deg);
+        }
+    }
 }
+
+// Responsive
 
 @media (max-width: 992px) {
     .app {

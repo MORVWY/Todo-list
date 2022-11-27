@@ -2,8 +2,7 @@ window.addEventListener('load', () => {
     const nameInput = document.querySelector('.greeting-item'),
         addTaskForm = document.querySelector('.add-form'),
         addTaskButton = document.querySelector('.add-item'),
-        taskList = document.querySelector('.todo-list'),
-        allTodoCatedory = document.querySelector('.category-list__item-all');
+        taskList = document.querySelector('.todo-list');
 
     // Local storage name
 

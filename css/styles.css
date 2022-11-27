@@ -375,6 +375,7 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--main-light-bg-color);
+  margin-left: -5rem;
 }
 .app .todo-list__item-buttons {
   display: -webkit-box;
@@ -399,6 +400,33 @@ body {
 }
 .app .todo-list__item .complete {
   text-decoration: line-through;
+}
+.app .rotate-addButton {
+  -webkit-animation: rotation 0.5s 1 linear;
+          animation: rotation 0.5s 1 linear;
+}
+.app .complete {
+  text-decoration: line-through;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
 }
 
 @media (max-width: 992px) {
