@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
         userName = body.querySelector('.greeting-item'),
         addTaskForm = body.querySelector('.add-form'),
         addTaskButton = body.querySelector('.add-item'),
-        taskList = document.querySelector('.todo-list');
+        taskList = body.querySelector('.todo-list');
 
     // Local storage user name
 
