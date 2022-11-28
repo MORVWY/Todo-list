@@ -65,9 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const checked = tasks.checked ? 'checked' : ''; // Переделать
 
             defaultTask += `
-            <div class="todo-list__item" id="${tasks.uniqueId}">
-                <input type="checkbox" class="todo-list__item-checkbox" ${checked}>
-                <input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly>
+            <div class="todo-list__item" id="${tasks.uniqueId}"><input type="checkbox" class="todo-list__item-checkbox" ${checked}><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly>
                 <div class="todo-list__item-buttons">
                     <img src="images/edit-icon.png" alt="edit icon" class="edit-todo">
                     <img src="images/delete-icon.png" alt="delete icon" class="delete-todo">
@@ -108,11 +106,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     taskList.addEventListener('click', event => {
         const target = event.target;
-        
+
 
         if (target.classList.contains('delete-todo')) {
             const uniqueId = target.parentElement.parentElement.getAttribute('id');
-            
+
             deleteTasks(uniqueId, todoDB);
             displayTasks(todoDB);
         }
@@ -125,10 +123,39 @@ window.addEventListener('DOMContentLoaded', () => {
             displayTasks(todoDB);
         }
 
+        if (target.classList.contains('edit-todo')) {
+            const uniqueId = target.parentElement.parentElement.getAttribute('id');
+            const editInput = target.parentElement.parentElement.firstChild.nextSibling;
+
+            editTasks(uniqueId, todoDB, editInput);
+        }
+
         localStorage.setItem('todo', JSON.stringify(todoDB));
     });
 
+    // Edit tasks function
+
+    function editTasks(id, db, input) {
+        db.forEach((todo) => {
+            if (todo.uniqueId == id) {
+                input.removeAttribute('readonly');
+                input.focus();
+
+                input.addEventListener('blur', event => {
+                    input.setAttribute('readonly', true);
+
+                    todo.content = event.target.value;
+
+                    localStorage.setItem('todo', JSON.stringify(todoDB));
+
+                    displayTasks(todoDB);
+                });
+            }
+        });
+    }
+
     // Change function status
+
     function changeTasksStatus(id, status, db) {
         db.forEach(item => {
             if (item.uniqueId == id) {
@@ -136,6 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // Animation
 
