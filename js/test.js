@@ -3,12 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
         userName = body.querySelector('.greeting-item'),
         addTaskForm = body.querySelector('.add-form'),
         addTaskButton = body.querySelector('.add-item'),
-        taskList = body.querySelector('.todo-list'),
-        addCategoryButton = body.querySelector('.category-add__item'),
-        addCategoryForm = body.querySelector('.category-add__name'),
-        categoryList = body.querySelector('.category-list'),
-        categoryListItem = body.querySelector('.category-list__item'),
-        todoTitleItem = body.querySelector('.todo-title__item');
+        taskList = document.querySelector('.todo-list');
 
     // Local storage user name
 
@@ -22,13 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Task DB
 
-    let categoryDB = [{
-        content: 'All todo',
-        uniqueId: 17
-    }];
-
-    displayCategories(categoryDB);
-
     let todoDB = [];
 
     // TodoDB local storage
@@ -38,28 +26,20 @@ window.addEventListener('DOMContentLoaded', () => {
         displayTasks(todoDB);
     }
 
-    // CategoryDB local storage
-
-    if (localStorage.getItem('category')) {
-        categoryDB = JSON.parse(localStorage.getItem('category'));
-        displayCategories(categoryDB);
-    }
-
     // Add task section
 
     addTaskButton.addEventListener('click', () => {
         let addTaskValue = addTaskForm.value;
 
         if (addTaskValue.trim() == '') {
-            alert('Empty task');
+            alert('Erorr: empty task');
             addTaskForm.value = '';
             addTaskForm.focus();
         } else if (!checkTaskCopy(addTaskValue, todoDB)) {
-            alert('Copy task');
+            alert('Error: copy added');
             addTaskForm.value = '';
             addTaskForm.focus();
         } else {
-
             const todo = {
                 content: addTaskValue.trim(),
                 checked: false,
@@ -78,74 +58,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add category section
-
-    addCategoryButton.addEventListener('click', () => {
-        let addCategoryValue = addCategoryForm.value;
-
-        if (addCategoryValue.trim() !== '') {
-
-            const category = {
-                content: addCategoryValue.trim(),
-                // checked: false,
-                uniqueId: Date.now()
-            };
-
-            categoryDB.push(category);
-            localStorage.setItem('category', JSON.stringify(categoryDB));
-
-            displayCategories(categoryDB);
-
-            addCategoryForm.value = '';
-            addCategoryForm.focus();
-        } else {
-            alert('Empty category');
-            addCategoryForm.value = '';
-            addCategoryForm.focus();
-        }
-    });
-
-    // Display categories function
-
-    function displayCategories(item) {
-        let defaultCategory = '';
-
-        item.forEach((categories) => {
-            if (categories.uniqueId == 17) {
-                defaultCategory += `
-                <div class="category-list__item" id="${categories.uniqueId}">
-                        <label>
-                            <input type="radio" name="category-list__item-name" class="category-list__item-name">
-                            <div class="category-list__item-nameButton">
-                                <div></div>
-                            </div>
-                        </label><input type="text" class="category-list__item-name" name="category-list__item-name"
-                            value="${categories.content}" readonly>
-                    </div>
-                `;
-            } else {
-                defaultCategory += `
-            <div class="category-list__item" id="${categories.uniqueId}">
-                    <label>
-                        <input type="radio" name="category-list__item-name" class="category-list__item-name">
-                        <div class="category-list__item-nameButton">
-                            <div></div>
-                        </div>
-                    </label><input type="text" class="category-list__item-name" name="category-list__item-name"
-                        value="${categories.content}" readonly>
-                    <div class="category-list__item-buttons">
-                        <img src="images/edit-icon.png" alt="edit icon" class="edit">
-                        <img src="images/delete-icon.png" alt="delete icon" class="delete">
-                    </div>
-                </div>
-            `;
-            }
-        });
-
-        categoryList.innerHTML = defaultCategory;
-    }
-
-
     // Display tasks function
 
     function displayTasks(item) {
@@ -156,8 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const checked = tasks.checked ? 'checked' : ''; // Переделать
 
             defaultTask += `
-            <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="images/checked.png"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly>
-                <div class="todo-list__item-buttons">
+            <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="../images/checked.png"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly><div class="todo-list__item-buttons">
                     <img src="images/edit-icon.png" alt="edit icon" class="edit-todo">
                     <img src="images/delete-icon.png" alt="delete icon" class="delete-todo">
                 </div>
@@ -174,9 +85,10 @@ window.addEventListener('DOMContentLoaded', () => {
         let noCopy = true;
 
         db.forEach((todo) => {
-            if (todo.content === item) {
+            if (todo.content.trim() === item.trim()) {
                 noCopy = false;
             }
+
         });
 
         return noCopy;
@@ -208,7 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('todo-list__item-checkbox')) {
             const uniqueId = target.parentElement.parentElement.getAttribute('id');
             const checked = target.checked;
-
+            
             changeTasksStatus(uniqueId, checked, todoDB);
             displayTasks(todoDB);
         }
@@ -216,31 +128,22 @@ window.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('edit-todo')) {
             const uniqueId = target.parentElement.parentElement.getAttribute('id');
             const editInput = target.parentElement.parentElement.firstChild.nextSibling;
+            const input = target.parentElement.previousSibling;
+            const inputLength = target.parentElement.previousSibling.value.length;
+            
+           
+            input.setSelectionRange(inputLength, inputLength);
+            input.focus();
+            
+            if (input.classList.contains('complete')) {
+                input.classList.remove('complete');
+            }
 
             editTasks(uniqueId, todoDB, editInput);
         }
 
         localStorage.setItem('todo', JSON.stringify(todoDB));
     });
-
-    // CategoryList events
-
-    categoryList.addEventListener('click', event => {
-        const target = event.target;
-
-        if (document.querySelector('.category-list__item label input').checked == true) {
-            todoTitleItem.value = target.parentElement.nextSibling.value;
-            displayCategories(categoryDB);
-        }
-    });
-
-    // Category functions
-
-    function displayCurrentCategory(item) {
-        item.forEach((cat) => {
-
-        });
-    }
 
     // Edit tasks function
 

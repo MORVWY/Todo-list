@@ -2,10 +2,11 @@
     --main-light-bg-color: #EEEEEE;
     --main-dark-bg-color: #393E46;
     --black-color: #222831;
+    --grey-color: grey;
     --white-color: white;
     --teal-color: #00ADB5;
-    --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    --shadow-checked: rgba(0, 173, 181, 0.9) 0px 1px 5px;
+    --shadow: rgba(0, 0, 0, 0.35) 0rem 0.313rem 0.938rem;
+    --shadow-checked: rgba(0, 173, 181, 0.9) 0rem 0.063rem 0.313rem;
 }
 
 // font-family: 'Josefin Sans', sans-serif;
@@ -19,10 +20,30 @@
 
 body {
     background-color: var(--main-light-bg-color);
+
+    &::-webkit-scrollbar {
+        width: 12px;
+        /* ширина всей полосы прокрутки */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--main-light-bg-color);
+        /* цвет зоны отслеживания */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--main-dark-bg-color);
+        /* цвет бегунка */
+        border-radius: 20px;
+        /* округлось бегунка */
+        border: 3px solid var(--main-light-bg-color);
+        /* отступ вокруг бегунка */
+    }
 }
 
 .app {
     display: flex;
+    justify-content: center;
     width: 100%;
     min-height: 100vh;
 
@@ -30,7 +51,7 @@ body {
     .hamburger {
         position: relative;
         display: none;
-        width: 35px;
+        width: 2.188rem;
         cursor: pointer;
         appearance: none;
         background: none;
@@ -45,18 +66,18 @@ body {
         content: '';
         display: block;
         width: 100%;
-        height: 5px;
+        height: 0.313rem;
         background-color: var(--main-dark-bg-color);
-        margin: 6px 0px;
+        margin: 0.375rem 0rem;
         transition: 0.4s;
     }
 
     .hamburger.is-active:before {
-        transform: rotate(-45deg) translate(-8px, 6px);
+        transform: rotate(-45deg) translate(-0.5rem, 0.375rem);
     }
 
     .hamburger.is-active:after {
-        transform: rotate(45deg) translate(-9px, -8px);
+        transform: rotate(45deg) translate(-0.563rem, -0.5rem);
     }
 
     .hamburger.is-active .hamburger__bar {
@@ -68,158 +89,6 @@ body {
         position: absolute;
         right: 3%;
         top: 3%;
-    }
-
-    .category {
-        border-bottom-right-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-        background: url('../images/girl-logo.svg') no-repeat;
-        background-color: var(--main-dark-bg-color);
-        background-size: 100% auto;
-        flex-basis: 25%;
-        padding: 10% 1.5rem 1.5rem;
-
-        &-list {
-            display: flex;
-            justify-content: flex-start;
-            flex-direction: column;
-
-            &__item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: var(--main-light-bg-color);
-                padding: 1rem;
-                border-radius: 1.5rem;
-                box-shadow: var(--shadow);
-                margin-top: 2rem;
-
-                &:hover:first-child {
-                    cursor: pointer;
-                }
-
-                &-all {
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                    color: var(--main-dark-bg-color);
-                    width: 100%;
-                    text-align: center;
-                    user-select: none;
-                }
-
-                input[type=text] {
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                    color: var(--main-dark-bg-color);
-                    margin-left: -1rem;
-                    cursor: default;
-                }
-
-                input[type=radio] {
-                    display: none;
-                }
-
-                input[type=radio]:checked+.category-list__item-nameButton div {
-                    display: block;
-                }
-
-                input[type=radio]:checked+.category-list__item-nameButton {
-                    box-shadow: var(--shadow-checked);
-                }
-
-                &-nameButton {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 1rem;
-                    width: 1rem;
-                    border: solid 0.1rem var(--teal-color);
-                    margin-right: 0;
-                    border-radius: 999rem;
-                    cursor: pointer;
-
-                    div {
-                        display: none;
-                        width: 0.5rem;
-                        height: 0.5rem;
-                        background-color: var(--teal-color);
-                        border-radius: 999rem;
-                        cursor: pointer;
-                    }
-                }
-
-                &-name {
-                    border: none;
-                    background-color: var(--main-light-bg-color);
-                    outline: none;
-                    width: 65%;
-                }
-
-                &-buttons {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    img {
-                        width: 25px;
-                        height: 25px;
-
-                        &:hover {
-                            cursor: pointer;
-                            transition: .5s;
-                            opacity: .5;
-                        }
-                    }
-                }
-            }
-        }
-
-        &-add {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--main-light-bg-color);
-            padding: 1rem;
-            border-radius: 1.5rem;
-            box-shadow: var(--shadow);
-            bottom: 10px;
-
-            &__name {
-                border: none;
-                background-color: var(--main-light-bg-color);
-                outline: none;
-                width: 75%;
-            }
-
-            input[type=text] {
-                font-size: 1.2rem;
-                font-weight: 500;
-                color: var(--main-dark-bg-color);
-            }
-
-            &__item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 0.1rem solid;
-                width: 25px;
-                height: 25px;
-                border-radius: 25px;
-                font-size: 1.1rem;
-                font-weight: 500;
-                color: var(--teal-color);
-
-                &:hover {
-                    cursor: pointer;
-                    opacity: .5;
-                    transition: .5s;
-                }
-            }
-        }
-
-        .selected {
-            box-shadow: var(--shadow-checked);
-        }
     }
 
     .todo {
@@ -262,9 +131,9 @@ body {
                 align-items: center;
                 background-color: var(--main-dark-bg-color);
                 padding: 1rem;
-                border-radius: 1.5rem;
+                border-radius: 1rem;
                 box-shadow: var(--shadow);
-                bottom: 10px;
+                bottom: 0.625rem;
 
                 input[type=text] {
                     font-size: 1.2rem;
@@ -284,10 +153,10 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border: 0.1rem solid;
-                    width: 25px;
-                    height: 25px;
-                    border-radius: 25px;
+                    border: 0.125rem solid;
+                    width: 1.563rem;
+                    height: 1.563rem;
+                    border-radius: 1.563rem;
                     font-size: 1.1rem;
                     font-weight: 500;
                     color: var(--teal-color);
@@ -312,12 +181,6 @@ body {
                 opacity: .75;
             }
 
-            input[type='text'] {
-                background-color: var(--main-light-bg-color);
-                outline: none;
-                border: none;
-            }
-
             &__item {
                 background-color: var(--main-light-bg-color);
                 color: var(--main-dark-bg-color);
@@ -327,7 +190,7 @@ body {
 
             &__line {
                 border: none;
-                border-bottom: 2px solid;
+                border-bottom: 0.125rem solid;
                 border-radius: 6.25rem;
                 color: var(--main-dark-bg-color);
                 box-shadow: var(--shadow);
@@ -348,12 +211,44 @@ body {
                 flex-basis: 48%;
                 background-color: var(--main-dark-bg-color);
                 padding: 1rem;
-                border-radius: 1.5rem;
+                border-radius: 1rem;
                 box-shadow: var(--shadow);
                 margin-top: 1.5em;
+                z-index: 1;
 
                 &:nth-child(-n+2) {
                     margin-top: 0;
+                }
+
+                label {
+                    input[type='checkbox'] {
+                        display: none;
+                    }
+
+                    div {
+                        width: 1rem;
+                        height: 1rem;
+                        border: solid 0.125rem var(--teal-color);
+                        border-radius: 0.3rem;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+                            display: none;
+                        }
+                    }
+
+                    input[type='checkbox']:checked+div {
+                        box-shadow: var(--shadow-checked);
+                    }
+
+                    input[type='checkbox']:checked+div img {
+                        display: block;
+                    }
                 }
 
                 &-name {
@@ -367,40 +262,7 @@ body {
                     font-size: 1.2rem;
                     font-weight: 500;
                     color: var(--main-light-bg-color);
-                    margin-left: -5.8rem;
-                    cursor: default;
-                }
-
-                label {
-                    input[type=checkbox] {
-                        cursor: pointer;
-                        display: none;
-                    }
-
-                    div {
-                        border: 0.1rem solid;
-                        width: 1rem;
-                        height: 1rem;
-                        color: var(--teal-color);
-                        cursor: pointer;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        img {
-                            width: 100%;
-                            height: auto;
-                            display: none;
-                        }
-                    }
-
-                    input[type=checkbox]:checked+div {
-                        box-shadow: var(--shadow-checked);
-                    }
-
-                    input[type=checkbox]:checked+div img {
-                        display: block;
-                    }
+                    margin-left: -5rem;
                 }
 
                 &-buttons {
@@ -409,8 +271,8 @@ body {
                     align-items: center;
 
                     img {
-                        width: 25px;
-                        height: 25px;
+                        width: 1.563rem;
+                        height: 1.563rem;
 
                         &:hover {
                             cursor: pointer;
@@ -418,12 +280,6 @@ body {
                             opacity: .5;
                         }
                     }
-                }
-
-                .complete {
-                    text-decoration: line-through;
-                    text-decoration-color: var(--teal-color);
-                    text-decoration-thickness: 0.15rem;
                 }
             }
         }
@@ -435,6 +291,9 @@ body {
 
     .complete {
         text-decoration: line-through;
+        color: var(--main-light-bg-color) !important;
+        opacity: .5;
+
     }
 
     @keyframes rotation {
@@ -444,6 +303,24 @@ body {
 
         to {
             transform: rotate(180deg);
+        }
+    }
+}
+
+.createdby {
+    // position: absolute;
+    // right: 0;
+    // top: 1%;
+    font-family: 'Josefin Sans', sans-serif;
+    opacity: .5;
+
+    &-item {
+        color: var(--main-dark-bg-color);
+
+        &__link {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 700;
         }
     }
 }
