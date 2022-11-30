@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
+    <title>Todo App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,15 +19,12 @@
 
     <main class="app">
 
-        <div class="hamburger display-block">
-            <div class="hamburger__bar"></div>
-        </div>
-
         <section class="app-todo todo">
 
             <div class="todo-header">
 
                 <div class="todo-header__greeting greeting">
+                    <img src="images/greeting-icon.svg" alt="greeting icon" class="greeting-icon">
                     <h1 class="greeting-header">What's up,</h1>
                     <input type="text" name="greeting-item" class="greeting-item" placeholder="enter your name">
                 </div>
@@ -39,10 +36,25 @@
 
             </div>
 
-            <div class="todo-title">
-                <div class="todo-title__header">Your todo list</div>
-                <hr class="todo-title__line">
+            <div class="todo-task">
+                <img src="images/arrow.svg" alt="arrow">
+                <div class="todo-task__text">Add your task</div>
             </div>
+
+            <div class="todo-title">
+                <div class="todo-title__left">
+                    <img src="images/list-icon.svg" alt="list icon" class="todo-title__icon">
+                    <div class="todo-title__header">Your todo list</div>
+                </div>
+                <div class="todo-title__right">
+                    <div class="todo-title__search">Search</div>
+                    <div class="todo-title__clear">Clear All <img src="images/delete-all-icon.svg"
+                            alt="delete all icon"></div>
+                    <div class="todo-title__counter">Created tasks: <input type="text" value="100" readonly></div>
+                </div>
+            </div>
+
+            <hr class="todo-line">
 
             <div class="todo-list">
 

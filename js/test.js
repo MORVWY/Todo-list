@@ -68,9 +68,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const checked = tasks.checked ? 'checked' : ''; // Переделать
 
             defaultTask += `
-            <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="../images/checked.png"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly><div class="todo-list__item-buttons">
-                    <img src="images/edit-icon.png" alt="edit icon" class="edit-todo">
-                    <img src="images/delete-icon.png" alt="delete icon" class="delete-todo">
+            <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="../images/checked.svg"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly><div class="todo-list__item-buttons">
+                    <img src="images/edit-icon.svg" alt="edit icon" class="edit-todo">
+                    <img src="images/delete-icon.svg" alt="delete icon" class="delete-todo">
                 </div>
             </div>
             `;
