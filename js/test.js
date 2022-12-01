@@ -3,7 +3,15 @@ window.addEventListener('DOMContentLoaded', () => {
         userName = body.querySelector('.greeting-item'),
         addTaskForm = body.querySelector('.add-form'),
         addTaskButton = body.querySelector('.add-item'),
-        taskList = document.querySelector('.todo-list');
+        taskList = body.querySelector('.todo-list'),
+        todoCounter = body.querySelector('.todo-title__counter input'),
+        clearAll = body.querySelector('.todo-title__clear img'),
+        searchButton = body.querySelector('.todo-title__search img'),
+        copyAlert = body.querySelector('.todo__copy-alert'),
+        emptyTask = body.querySelector('.todo__warning-alert'),
+        successAlert = body.querySelector('.success-alert');
+
+        let searchInput = body.querySelector('.todo-title__search input');
 
     // Local storage user name
 
@@ -26,17 +34,31 @@ window.addEventListener('DOMContentLoaded', () => {
         displayTasks(todoDB);
     }
 
+    function displayClearButton() {
+        if (todoDB.length > 1) {
+            body.querySelector('.todo-title__clear').style.display = 'flex';
+        } else {
+            body.querySelector('.todo-title__clear').style.display = 'none';
+        }
+    }
+
     // Add task section
 
     addTaskButton.addEventListener('click', () => {
         let addTaskValue = addTaskForm.value;
 
         if (addTaskValue.trim() == '') {
-            alert('Erorr: empty task');
+            emptyTask.classList.add('display-flex');
+            setTimeout(function(){
+                emptyTask.classList.remove('display-flex');
+            }, 3000);
             addTaskForm.value = '';
             addTaskForm.focus();
         } else if (!checkTaskCopy(addTaskValue, todoDB)) {
-            alert('Error: copy added');
+            copyAlert.classList.add('display-flex');
+            setTimeout(function(){
+                copyAlert.classList.remove('display-flex');
+            }, 3000);
             addTaskForm.value = '';
             addTaskForm.focus();
         } else {
@@ -47,6 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
             };
 
             todoDB.push(todo);
+
             localStorage.setItem('todo', JSON.stringify(todoDB));
 
 
@@ -77,6 +100,9 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         taskList.innerHTML = defaultTask;
+        taskCounter();
+        displayClearButton();
+        displaySearch();
     }
 
     // Check for task dublicate
@@ -120,7 +146,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('todo-list__item-checkbox')) {
             const uniqueId = target.parentElement.parentElement.getAttribute('id');
             const checked = target.checked;
-            
+
             changeTasksStatus(uniqueId, checked, todoDB);
             displayTasks(todoDB);
         }
@@ -130,11 +156,11 @@ window.addEventListener('DOMContentLoaded', () => {
             const editInput = target.parentElement.parentElement.firstChild.nextSibling;
             const input = target.parentElement.previousSibling;
             const inputLength = target.parentElement.previousSibling.value.length;
-            
-           
+
+
             input.setSelectionRange(inputLength, inputLength);
             input.focus();
-            
+
             if (input.classList.contains('complete')) {
                 input.classList.remove('complete');
             }
@@ -189,4 +215,40 @@ window.addEventListener('DOMContentLoaded', () => {
 
     addTaskButton.addEventListener("animationend", rotateAnimationRemove, false);
 
+    // Todo counter
+
+    function taskCounter() {
+        todoCounter.value = todoDB.length;
+    }
+
+    // Delete all tasks
+
+    function deleteAllTasks() {
+        todoDB.splice(0, todoDB.length);
+    }
+
+    clearAll.addEventListener('click', () => {
+        deleteAllTasks();
+        successAlert.classList.add('display-flex');
+        setTimeout(function(){
+            successAlert.classList.remove('display-flex');
+        }, 3000);
+        localStorage.setItem('todo', JSON.stringify(todoDB));
+
+        displayTasks(todoDB);
+    });
+
+    // Search section
+
+    function displaySearch() {
+        if (todoDB.length > 1) {
+            body.querySelector('.todo-title__search').style.display = 'flex';
+        } else {
+            body.querySelector('.todo-title__search').style.display = 'none';
+        }
+    }
+
+    searchButton.addEventListener('click', () => {
+        searchInput.focus();
+    });
 });
