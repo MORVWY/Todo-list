@@ -45,7 +45,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     addTaskButton.addEventListener('click', () => {
         let addTaskValue = addTaskForm.value;
-        const task = body.querySelector('.task-list__item');
 
         if (addTaskValue.trim() == '') {
             emptyTask.classList.add('display-flex');
@@ -129,10 +128,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Tasklist events
-
-    function test(uniqueId) {
-        deleteTasks(uniqueId, todoDB);
-    }
 
     taskList.addEventListener('click', event => {
         const target = event.target;
