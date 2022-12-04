@@ -39,6 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    displayClearButton();
+
     // Add task section
 
     addTaskButton.addEventListener('click', () => {
