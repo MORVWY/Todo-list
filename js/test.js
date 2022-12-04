@@ -6,12 +6,9 @@ window.addEventListener('DOMContentLoaded', () => {
         taskList = body.querySelector('.todo-list'),
         todoCounter = body.querySelector('.todo-title__counter input'),
         clearAll = body.querySelector('.todo-title__clear img'),
-        searchButton = body.querySelector('.todo-title__search img'),
         copyAlert = body.querySelector('.todo__copy-alert'),
         emptyTask = body.querySelector('.todo__warning-alert'),
-        successAlert = body.querySelector('.success-alert');
-
-        let searchInput = body.querySelector('.todo-title__search input');
+        successAlert = body.querySelector('.todo__success-alert');
 
     // Local storage user name
 
@@ -46,19 +43,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
     addTaskButton.addEventListener('click', () => {
         let addTaskValue = addTaskForm.value;
+        const task = body.querySelector('.task-list__item');
 
         if (addTaskValue.trim() == '') {
             emptyTask.classList.add('display-flex');
-            setTimeout(function(){
+            setTimeout(function () {
                 emptyTask.classList.remove('display-flex');
-            }, 3000);
+            }, 2500);
             addTaskForm.value = '';
             addTaskForm.focus();
         } else if (!checkTaskCopy(addTaskValue, todoDB)) {
             copyAlert.classList.add('display-flex');
-            setTimeout(function(){
+            setTimeout(function () {
                 copyAlert.classList.remove('display-flex');
-            }, 3000);
+            }, 2500);
             addTaskForm.value = '';
             addTaskForm.focus();
         } else {
@@ -71,7 +69,6 @@ window.addEventListener('DOMContentLoaded', () => {
             todoDB.push(todo);
 
             localStorage.setItem('todo', JSON.stringify(todoDB));
-
 
             displayTasks(todoDB);
             rotateAnimationAdd();
@@ -102,7 +99,6 @@ window.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = defaultTask;
         taskCounter();
         displayClearButton();
-        displaySearch();
     }
 
     // Check for task dublicate
@@ -132,15 +128,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Tasklist events
 
+    function test(uniqueId) {
+        deleteTasks(uniqueId, todoDB);
+    }
+
     taskList.addEventListener('click', event => {
         const target = event.target;
-
 
         if (target.classList.contains('delete-todo')) {
             const uniqueId = target.parentElement.parentElement.getAttribute('id');
 
+            target.parentElement.parentElement.classList.add('scale-out-center');
+
             deleteTasks(uniqueId, todoDB);
-            displayTasks(todoDB);
+
+            setTimeout(displayTasks, 500, todoDB);
+            
         }
 
         if (target.classList.contains('todo-list__item-checkbox')) {
@@ -228,27 +231,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     clearAll.addEventListener('click', () => {
+
         deleteAllTasks();
         successAlert.classList.add('display-flex');
-        setTimeout(function(){
+        setTimeout(function () {
             successAlert.classList.remove('display-flex');
         }, 3000);
         localStorage.setItem('todo', JSON.stringify(todoDB));
 
         displayTasks(todoDB);
-    });
-
-    // Search section
-
-    function displaySearch() {
-        if (todoDB.length > 1) {
-            body.querySelector('.todo-title__search').style.display = 'flex';
-        } else {
-            body.querySelector('.todo-title__search').style.display = 'none';
-        }
-    }
-
-    searchButton.addEventListener('click', () => {
-        searchInput.focus();
     });
 });
