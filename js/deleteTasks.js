@@ -11,6 +11,8 @@ function displayClearButton() {
     }
 }
 
+displayClearButton();
+
 // Delete one task
 
 function deleteTask(id, db) {

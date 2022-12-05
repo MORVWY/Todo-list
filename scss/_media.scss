@@ -42,6 +42,13 @@
                     }
                 }
             }
+
+            &-list {
+                &__empty {
+                    margin-top: 80px;
+                    font-size: 7rem;
+                }
+            }
         }
     }
 }
@@ -120,6 +127,11 @@
 
             &-list {
                 flex-direction: column;
+
+                &__empty {
+                    margin-top: 60px;
+                    font-size: 6rem;
+                }
 
                 &__item {
 
@@ -202,7 +214,10 @@
             }
 
             &-list {
-
+                &__empty {
+                    margin-top: 30px;
+                    font-size: 3rem;
+                }
                 &__item {
 
                     &:nth-child(-n+2) {
@@ -218,7 +233,7 @@
             &__copy-alert,
             &__warning-alert,
             &__success-alert {
-                margin-top: 50px;
+                margin-top: 40px;
             }
         }
     }

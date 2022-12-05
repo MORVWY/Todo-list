@@ -1,6 +1,3 @@
-import {
-    displayClearButton
-} from "./deleteTasks.js";
 import {displayTasks} from './tasks.js';
 
 // DOM
@@ -25,5 +22,3 @@ if (localStorage.getItem('todo')) {
     todoDB = JSON.parse(localStorage.getItem('todo'));
     displayTasks(todoDB);
 }
-
-displayClearButton();

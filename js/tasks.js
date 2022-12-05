@@ -1,18 +1,28 @@
-import {taskCounter} from './counter.js';
-import {todoDB, taskList} from './app.js';
-import {rotateAnimationAdd} from './animations.js';
-import {displayClearButton, deleteTask} from './deleteTasks.js';
+import {
+    taskCounter
+} from './counter.js';
+import {
+    todoDB,
+    taskList
+} from './app.js';
+import {
+    rotateAnimationAdd
+} from './animations.js';
+import {
+    displayClearButton,
+    deleteTask
+} from './deleteTasks.js';
 
 // DOM elements
 
 const addTaskForm = document.querySelector('.add-form'),
-addTaskButton = document.querySelector('.add-item');
+    addTaskButton = document.querySelector('.add-item');
 
 // DOM alert elements
 
 const copyAlert = document.querySelector('.todo__copy-alert'),
-emptyTask = document.querySelector('.todo__warning-alert'),
-successAlert = document.querySelector('.todo__success-alert');
+    emptyTask = document.querySelector('.todo__warning-alert'),
+    successAlert = document.querySelector('.todo__success-alert');
 
 // Add task section
 
@@ -52,6 +62,17 @@ addTaskButton.addEventListener('click', () => {
     }
 });
 
+function emptyTaskList() {
+    let emptyTaskList = '';
+
+    if (todoDB.length < 1) {
+        emptyTaskList = `<div class='todo-list__empty'>Empty list</div>`;
+        taskList.innerHTML = emptyTaskList;
+    }
+}
+
+emptyTaskList();
+
 // Display tasks function
 
 function displayTasks(item) {
@@ -71,6 +92,7 @@ function displayTasks(item) {
     });
 
     taskList.innerHTML = defaultTask;
+    emptyTaskList();
     taskCounter();
     displayClearButton();
 }
@@ -164,4 +186,8 @@ function changeTasksStatus(id, status, db) {
     });
 }
 
-export {displayTasks, successAlert, addTaskButton};
+export {
+    displayTasks,
+    successAlert,
+    addTaskButton
+};
