@@ -1,0 +1,42 @@
+.todo__success-alert {
+    position: absolute;
+    right: 4%;
+    top: 150px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: $teal-color;
+    border-radius: 10px;
+    box-shadow: $shadow-checked;
+    color: $white-color;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.todo__copy-alert,
+.todo__warning-alert {
+    position: absolute;
+    right: 4%;
+    top: 150px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: $alert-color;
+    border-radius: 10px;
+    box-shadow: $shadow-alert;
+    color: $white-color;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.display-flex {
+    display: flex;
+}

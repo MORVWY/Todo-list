@@ -1,141 +1,241 @@
-window.addEventListener('load', () => {
-    const nameInput = document.querySelector('.greeting-item'),
-        addTaskForm = document.querySelector('.add-form'),
-        addTaskButton = document.querySelector('.add-item'),
-        taskList = document.querySelector('.todo-list');
+// DOM element selection
 
-    // Local storage name
+export const body = document.querySelector('body'),
+    userName = body.querySelector('.greeting-item'),
+    addTaskForm = body.querySelector('.add-form'),
+    addTaskButton = body.querySelector('.add-item'),
+    taskList = body.querySelector('.todo-list'),
+    todoCounter = body.querySelector('.todo-title__counter input'),
+    clearAll = body.querySelector('.todo-title__clear img'),
+    copyAlert = body.querySelector('.todo__copy-alert'),
+    emptyTask = body.querySelector('.todo__warning-alert'),
+    successAlert = body.querySelector('.todo__success-alert');
 
-    const userName = localStorage.getItem('userName') || '';
-    nameInput.value = userName;
+// Local storage user name
 
-    nameInput.addEventListener('change', e => {
-        localStorage.setItem('userName', e.target.value);
-    });
+const userNameLocal = localStorage.getItem('userNameLocal') || '';
 
-    // Task DB
+userName.value = userNameLocal;
 
-    let tasks = [];
+userName.addEventListener('change', (e) => {
+    localStorage.setItem('userNameLocal', e.target.value);
+});
 
-    if(localStorage.getItem('todo')) {
-        tasks = JSON.parse(localStorage.getItem('todo')); 
-        tasksRender(tasks);
+// Task DB
+
+let todoDB = [];
+
+// TodoDB local storage
+
+if (localStorage.getItem('todo')) {
+    todoDB = JSON.parse(localStorage.getItem('todo'));
+    displayTasks(todoDB);
+}
+
+function displayClearButton() {
+    if (todoDB.length > 1) {
+        body.querySelector('.todo-title__clear').style.display = 'flex';
+    } else {
+        body.querySelector('.todo-title__clear').style.display = 'none';
     }
+}
 
-    // Add task on click
+displayClearButton();
 
-    addTaskButton.addEventListener('click', () => {
-        let taskFormValue = addTaskForm.value;
+// Add task section
 
-        if (taskFormValue && taskCopyCheck(taskFormValue, tasks) && taskFormValue.trim() !== '') {
-            addTask(taskFormValue.trim(), tasks);
-            addTaskForm.value = '';
-            addTaskForm.focus();
-            tasksRender(tasks);
-        } else {
-            alert('Enter valid task');
-            addTaskForm.value = '';
-            addTaskForm.focus();
-        }
+addTaskButton.addEventListener('click', () => {
+    let addTaskValue = addTaskForm.value;
 
-        localStorage.setItem('todo', JSON.stringify(tasks));
-    });    
-
-    // Add task function
-
-    function addTask(text, list) {
-        const timeStamp = Date.now();
-        const task = {
-            id: timeStamp,
-            category: '',
-            text,
-            isComplete: false
+    if (addTaskValue.trim() == '') {
+        emptyTask.classList.add('display-flex');
+        setTimeout(function () {
+            emptyTask.classList.remove('display-flex');
+        }, 2500);
+        addTaskForm.value = '';
+        addTaskForm.focus();
+    } else if (!checkTaskCopy(addTaskValue, todoDB)) {
+        copyAlert.classList.add('display-flex');
+        setTimeout(function () {
+            copyAlert.classList.remove('display-flex');
+        }, 2500);
+        addTaskForm.value = '';
+        addTaskForm.focus();
+    } else {
+        const todo = {
+            content: addTaskValue.trim(),
+            checked: false,
+            uniqueId: Date.now()
         };
 
-        list.push(task);
+        todoDB.push(todo);
+
+        localStorage.setItem('todo', JSON.stringify(todoDB));
+
+        displayTasks(todoDB);
+        rotateAnimationAdd();
+
+        addTaskForm.value = '';
+        addTaskForm.focus();
     }
+});
 
-    // Check for task dublicate
-    function taskCopyCheck(text, list) {
-        let isNotHave = true;
+// Display tasks function
 
-        list.forEach((task) => {
-            if (task.text === text) {
-                alert('Task is already added');
-                isNotHave = false;
-            }
+function displayTasks(item) {
+    let defaultTask = '';
 
-        });
+    item.forEach((tasks) => {
+        const completeTasks = tasks.checked ? 'todo-list__item-name complete' : 'todo-list__item-name'; // Переделать
+        const checked = tasks.checked ? 'checked' : ''; // Переделать
 
-        return isNotHave;
-    }
-
-    // Show task function
-
-    function tasksRender(list) {
-        let defaultTask = '';
-
-        list.forEach((task) => {
-            const cls = task.isComplete ? 'todo-list__item-name complete' : 'todo-list__item-name';
-            const checked = task.isComplete ? 'checked' : '';
-
-            defaultTask += `
-            <div class="todo-list__item" id="${task.id}">
-                <input type="checkbox" ${checked} class="todo-list__item-checkbox">
-                <input type="text" class="${cls}" name="todo-list__item-name" value="${task.text}" readonly>
-                <div class="todo-list__item-buttons">
-                    <img src="images/edit-icon.png" alt="edit icon" class="edit-todo">
-                    <img src="images/delete-icon.png" alt="delete icon" class="delete-todo">
+        defaultTask += `
+            <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="../images/checked.svg"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly><div class="todo-list__item-buttons">
+                    <img src="images/edit-icon.svg" alt="edit icon" class="edit-todo">
+                    <img src="images/delete-icon.svg" alt="delete icon" class="delete-todo">
                 </div>
             </div>
             `;
-
-            taskList.innerHTML = defaultTask;
-        });
-    }
-
-    taskList.addEventListener('click', event => {
-        const target = event.target;
-        const isComplete = target.checked;
-        if (target.classList.contains('todo-list__item-checkbox')) {
-            const taskId = target.parentElement.getAttribute('id');
-            changeTaskStatus(taskId, isComplete, tasks);
-            tasksRender(tasks);
-        }
-
-        if (target.classList.contains('delete-todo')) {
-            const taskId = target.parentElement.parentElement.getAttribute('id');
-            deleteTask(taskId, tasks);
-            tasksRender(tasks);
-        }
-
-        localStorage.setItem('todo', JSON.stringify(tasks));
     });
 
-    function changeTaskStatus(id, status, list) {
-        list.forEach(task => {
-            if (task.id == id) {
-                task.isComplete = status;
-            }
-        });
+    taskList.innerHTML = defaultTask;
+    taskCounter();
+    displayClearButton();
+}
+
+// Check for task dublicate
+
+function checkTaskCopy(item, db) {
+    let noCopy = true;
+
+    db.forEach((todo) => {
+        if (todo.content.trim() === item.trim()) {
+            noCopy = false;
+        }
+
+    });
+
+    return noCopy;
+}
+
+// Delete function
+
+function deleteTasks(id, db) {
+    db.forEach((todo, item) => {
+        if (todo.uniqueId == id) {
+            db.splice(item, 1);
+        }
+    });
+}
+
+// Tasklist events
+
+taskList.addEventListener('click', event => {
+    const target = event.target;
+
+    if (target.classList.contains('delete-todo')) {
+        const uniqueId = target.parentElement.parentElement.getAttribute('id');
+
+        target.parentElement.parentElement.classList.add('scale-out-center');
+
+        deleteTasks(uniqueId, todoDB);
+
+        setTimeout(displayTasks, 500, todoDB);
+
     }
 
-    function deleteTask(id, list) {
-        list.forEach((task, idx) => {
-            if (task.id == id) {
-                list.splice(idx, 1);
-            }
-        });
+    if (target.classList.contains('todo-list__item-checkbox')) {
+        const uniqueId = target.parentElement.parentElement.getAttribute('id');
+        const checked = target.checked;
+
+        changeTasksStatus(uniqueId, checked, todoDB);
+        displayTasks(todoDB);
     }
 
-    // const hamb = document.querySelector('.hamburger');
+    if (target.classList.contains('edit-todo')) {
+        const uniqueId = target.parentElement.parentElement.getAttribute('id');
+        const editInput = target.parentElement.parentElement.firstChild.nextSibling;
+        const input = target.parentElement.previousSibling;
+        const inputLength = target.parentElement.previousSibling.value.length;
 
 
-    //     function makeHambMobActive() {
-    //         hamb.classList.toggle('is-active');
-    //     }
+        input.setSelectionRange(inputLength, inputLength);
+        input.focus();
 
-    //     hamb.addEventListener('click', function () {
-    //         makeHambMobActive();
-    //     });
+        if (input.classList.contains('complete')) {
+            input.classList.remove('complete');
+        }
+
+        editTasks(uniqueId, todoDB, editInput);
+    }
+
+    localStorage.setItem('todo', JSON.stringify(todoDB));
+});
+
+// Edit tasks function
+
+function editTasks(id, db, input) {
+    db.forEach((todo) => {
+        if (todo.uniqueId == id) {
+            input.removeAttribute('readonly');
+            input.focus();
+
+            input.addEventListener('blur', event => {
+                input.setAttribute('readonly', true);
+
+                todo.content = event.target.value;
+
+                localStorage.setItem('todo', JSON.stringify(todoDB));
+
+                displayTasks(todoDB);
+            });
+        }
+    });
+}
+
+// Change function status
+
+function changeTasksStatus(id, status, db) {
+    db.forEach(item => {
+        if (item.uniqueId == id) {
+            item.checked = status;
+        }
+    });
+}
+
+
+// Animation
+
+function rotateAnimationAdd() {
+    addTaskButton.classList.add('rotate-addButton');
+}
+
+function rotateAnimationRemove() {
+    addTaskButton.classList.remove('rotate-addButton');
+}
+
+addTaskButton.addEventListener("animationend", rotateAnimationRemove, false);
+
+// Todo counter
+
+function taskCounter() {
+    todoCounter.value = todoDB.length;
+}
+
+// Delete all tasks
+
+function deleteAllTasks() {
+    todoDB.splice(0, todoDB.length);
+}
+
+clearAll.addEventListener('click', () => {
+
+    deleteAllTasks();
+    successAlert.classList.add('display-flex');
+    setTimeout(function () {
+        successAlert.classList.remove('display-flex');
+    }, 3000);
+    localStorage.setItem('todo', JSON.stringify(todoDB));
+
+    displayTasks(todoDB);
 });

@@ -1,0 +1,225 @@
+@media (max-width: 992px) {
+    .app {
+        .todo {
+            &-header {
+                .greeting {
+                    &-header {
+                        font-size: 1.6rem;
+                    }
+
+                    &-item {
+                        font-size: 1.6rem;
+                    }
+                }
+
+                .add {
+                    input[type=text] {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            &-task {
+                &__text {
+                    font-size: 1.6rem;
+                }
+            }
+
+            &-title {
+                &__header {
+                    font-size: 1.6rem;
+                }
+
+                &__clear {
+                    margin-right: 15px;
+                }
+
+                &__counter {
+                    font-size: 1.6rem;
+
+                    input {
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .app {
+        .todo {
+
+            .todo__success-alert {
+                top: 220px;
+            }
+
+            .todo__copy-alert,
+            .todo__warning-alert {
+                top: 220px;
+            }
+
+            flex-basis: 100%;
+
+            &-header {
+                flex-direction: column;
+
+                .greeting {
+                    justify-content: center;
+
+                    &-header {
+                        font-size: 1.3rem;
+                    }
+
+                    &-item {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                .add {
+                    width: 100%;
+                    margin-top: 25px;
+
+                    input[type=text] {
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+            &-task {
+                &__text {
+                    font-size: 1.3rem;
+                }
+            }
+
+            &-title {
+                flex-direction: column;
+
+                &__right {
+                    margin-top: 25px;
+                }
+
+                &__header {
+                    font-size: 1.3rem;
+                }
+
+                &__clear {
+                    margin-right: 15px;
+                    font-size: 0.8rem;
+                    width: 6rem;
+                }
+
+                &__counter {
+                    font-size: 1.3rem;
+
+                    input {
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+
+            &-list {
+                flex-direction: column;
+
+                &__item {
+
+                    input[type=text] {
+                        font-size: 1rem;
+                    }
+
+                    &:nth-child(-n+2) {
+                        margin-top: 1.5rem;
+                    }
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .app {
+        min-height: 85vh;
+
+        .todo {
+
+            &-header {
+                flex-direction: column;
+
+                .greeting {
+                    flex-direction: column;
+
+                    &-header {
+                        font-size: 1.2rem;
+                        margin-top: 15px;
+                    }
+
+                    &-item {
+                        font-size: 1.2rem;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+
+                .add {
+                    input[type=text] {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+
+            &-task {
+                &__text {
+                    font-size: 1.2rem;
+                }
+            }
+
+            &-title {
+                margin-top: 50px;
+                &__right {
+                    flex-direction: column;
+                }
+
+                &__header {
+                    font-size: 1.2rem;
+                }
+
+                &__clear {
+                    margin-bottom: 25px;
+                }
+
+                &__counter {
+                    font-size: 1.2rem;
+
+                    input {
+                        font-size: 1.2rem;
+                        text-align: center;
+                    }
+                }
+            }
+
+            &-list {
+
+                &__item {
+
+                    &:nth-child(-n+2) {
+                        margin-top: 1.3rem;
+                    }
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+
+            &__copy-alert,
+            &__warning-alert,
+            &__success-alert {
+                margin-top: 50px;
+            }
+        }
+    }
+}

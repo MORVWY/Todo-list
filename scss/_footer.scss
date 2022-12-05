@@ -1,0 +1,19 @@
+.createdby {
+
+    font-family: 'Josefin Sans', sans-serif;
+    opacity: .5;
+    padding: 1rem;
+
+    &-item {
+        text-align: right;
+        color: $main-dark-bg-color;
+        margin-left: auto;
+        user-select: none;
+
+        &__link {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 700;
+        }
+    }
+}

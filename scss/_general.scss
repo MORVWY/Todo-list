@@ -1,0 +1,234 @@
+body {
+    background-color: $main-light-bg-color;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+        /* ширина всей полосы прокрутки */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $main-light-bg-color;
+        /* цвет зоны отслеживания */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $main-dark-bg-color;
+        /* цвет бегунка */
+        border-radius: 20px;
+        /* округлось бегунка */
+        border: 3px solid $main-light-bg-color;
+        /* отступ вокруг бегунка */
+    }
+
+    // Firefox
+    // scrollbar-width: thin;          /* "auto" или "thin" */
+    // scrollbar-color: blue orange;   /* цвет бегунка и зоны отслеживания */
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 93vh;
+
+    .todo {
+        flex-basis: 80%;
+        padding: 2rem;
+
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .greeting {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                &-icon {
+                    width: 30px;
+                    height: auto;
+                }
+
+                &-header {
+                    color: $main-dark-bg-color;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    margin-left: .5rem;
+                }
+
+                &-item {
+                    margin-left: 0.2rem;
+                    background-color: $main-light-bg-color;
+                    border: none;
+                    font-size: 2rem;
+                    outline: none;
+                    color: $main-dark-bg-color;
+                    font-weight: 700;
+                    width: 42%;
+                }
+            }
+
+            .add {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: $main-dark-bg-color;
+                padding: 1rem;
+                border-radius: 1rem;
+                box-shadow: $shadow;
+                bottom: 0.625rem;
+
+                input[type=text] {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    color: $main-light-bg-color;
+                }
+
+                &-form {
+                    flex: 1;
+                    border: none;
+                    background-color: $main-dark-bg-color;
+                    outline: none;
+                    width: 75%;
+                }
+
+                &-item {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 0.125rem solid;
+                    width: 1.563rem;
+                    height: 1.563rem;
+                    border-radius: 1.563rem;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    color: $teal-color;
+
+                    &:hover {
+                        cursor: pointer;
+                        opacity: .5;
+                        transition: .5s;
+                    }
+                }
+            }
+        }
+
+        &-task {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 1rem;
+
+            img {
+                width: 40px;
+                height: auto;
+                opacity: 0.75;
+                user-select: none;
+            }
+
+            &__text {
+                color: $main-dark-bg-color;
+                font-size: 2rem;
+                font-weight: 500;
+                opacity: 0.75;
+                margin-left: .75rem;
+                user-select: none;
+            }
+        }
+
+        &-title {
+            margin-top: 5.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__left {
+                display: flex;
+                align-items: center;
+            }
+
+            img {
+                opacity: .75;
+                width: 25px;
+                height: auto;
+                user-select: none;
+            }
+
+            &__header {
+                display: inline-block;
+                color: $main-dark-bg-color;
+                font-size: 2rem;
+                font-weight: 500;
+                opacity: .75;
+                user-select: none;
+            }
+
+            &__right {
+                display: flex;
+                align-items: center;
+            }
+
+            &__clear {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 25px;
+                background-color: $main-dark-bg-color;
+                padding: .5rem;
+                font-weight: 500;
+                color: $main-light-bg-color;
+                border-radius: 10px;
+                width: 7rem;
+                box-shadow: $shadow;
+                user-select: none;
+
+                img {
+                    margin-left: 5px;
+                    width: 1.563rem;
+                    height: 1.563rem;
+                }
+
+                img:hover {
+                    cursor: pointer;
+                    opacity: .5;
+                    transition: .5s;
+                }
+            }
+
+            &__counter {
+                display: flex;
+                align-items: center;
+                color: $main-dark-bg-color;
+                font-size: 2rem;
+                font-weight: 500;
+                user-select: none;
+                opacity: .75;
+
+                input {
+                    text-align: center;
+                    outline: none;
+                    border: none;
+                    background-color: $main-light-bg-color;
+                    color: $teal-color;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    max-width: 4rem;
+                }
+            }
+        }
+
+        &-line {
+            border: none;
+            border-bottom: 0.125rem solid;
+            border-radius: 6.25rem;
+            color: $main-dark-bg-color;
+            box-shadow: $shadow;
+            opacity: .75;
+        }
+    }
+}
+
