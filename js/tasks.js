@@ -3,7 +3,8 @@ import {
 } from './counter.js';
 import {
     todoDB,
-    taskList
+    taskList,
+    todoCounter
 } from './app.js';
 import {
     rotateAnimationAdd
@@ -14,35 +15,26 @@ import {
 } from './deleteTasks.js';
 
 // DOM elements
-
 const addTaskForm = document.querySelector('.add-form'),
     addTaskButton = document.querySelector('.add-item');
 
 // DOM alert elements
-
 const copyAlert = document.querySelector('.todo__copy-alert'),
     emptyTask = document.querySelector('.todo__warning-alert'),
     successAlert = document.querySelector('.todo__success-alert');
 
 // Add task section
-
 addTaskButton.addEventListener('click', () => {
     let addTaskValue = addTaskForm.value;
 
     if (addTaskValue.trim() == '') {
-        emptyTask.classList.add('display-flex');
-        setTimeout(function () {
-            emptyTask.classList.remove('display-flex');
-        }, 2500);
-        addTaskForm.value = '';
-        addTaskForm.focus();
+        
+        displayAlert(emptyTask);
+        taskFormValueChanges(addTaskForm);
     } else if (!checkTaskCopy(addTaskValue, todoDB)) {
-        copyAlert.classList.add('display-flex');
-        setTimeout(function () {
-            copyAlert.classList.remove('display-flex');
-        }, 2500);
-        addTaskForm.value = '';
-        addTaskForm.focus();
+
+        displayAlert(copyAlert);
+        taskFormValueChanges(addTaskForm);
     } else {
         const todo = {
             content: addTaskValue.trim(),
@@ -57,30 +49,29 @@ addTaskButton.addEventListener('click', () => {
         displayTasks(todoDB);
         rotateAnimationAdd();
 
-        addTaskForm.value = '';
-        addTaskForm.focus();
+        taskFormValueChanges(addTaskForm);
     }
 });
 
-function emptyTaskList() {
+// List message
+function emptyTaskListMessage(db, item) {
     let emptyTaskList = '';
 
-    if (todoDB.length < 1) {
+    if (db.length < 1) {
         emptyTaskList = `<div class='todo-list__empty'>Empty list</div>`;
-        taskList.innerHTML = emptyTaskList;
+        item.innerHTML = emptyTaskList;
     }
 }
 
-emptyTaskList();
+emptyTaskListMessage(todoDB, taskList);
 
 // Display tasks function
-
 function displayTasks(item) {
     let defaultTask = '';
 
     item.forEach((tasks) => {
-        const completeTasks = tasks.checked ? 'todo-list__item-name complete' : 'todo-list__item-name'; // Переделать
-        const checked = tasks.checked ? 'checked' : ''; // Переделать
+        const completeTasks = tasks.checked ? 'todo-list__item-name complete' : 'todo-list__item-name';
+        const checked = tasks.checked ? 'checked' : '';
 
         defaultTask += `
             <div class="todo-list__item" id="${tasks.uniqueId}"><label><input type="checkbox" class="todo-list__item-checkbox" ${checked}><div><img src="../images/checked.svg"></div></label><input type="text" class="${completeTasks}" name="todo-list__item-name" value="${tasks.content}" readonly><div class="todo-list__item-buttons">
@@ -92,13 +83,12 @@ function displayTasks(item) {
     });
 
     taskList.innerHTML = defaultTask;
-    emptyTaskList();
-    taskCounter();
+    emptyTaskListMessage(todoDB, taskList);
+    taskCounter(todoCounter, todoDB);
     displayClearButton();
 }
 
 // Check for task dublicate
-
 function checkTaskCopy(item, db) {
     let noCopy = true;
 
@@ -123,7 +113,6 @@ taskList.addEventListener('click', event => {
         target.parentElement.parentElement.classList.add('scale-out-center');
 
         deleteTask(uniqueId, todoDB);
-
         setTimeout(displayTasks, 500, todoDB);
     }
 
@@ -156,7 +145,6 @@ taskList.addEventListener('click', event => {
 });
 
 // Edit tasks function
-
 function editTasks(id, db, input) {
     db.forEach((todo) => {
         if (todo.uniqueId == id) {
@@ -177,13 +165,26 @@ function editTasks(id, db, input) {
 }
 
 // Change task status
-
 function changeTasksStatus(id, status, db) {
     db.forEach(item => {
         if (item.uniqueId == id) {
             item.checked = status;
         }
     });
+}
+
+// Task form value changes
+function taskFormValueChanges(item) {
+    item.value = '';
+    item.focus();
+}
+
+// Display alerts
+function displayAlert(item) {
+    item.classList.add('display-flex');
+    setTimeout(function () {
+        item.classList.remove('display-flex');
+    }, 2500);
 }
 
 export {

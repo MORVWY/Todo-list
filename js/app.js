@@ -1,9 +1,11 @@
-import {displayTasks} from './tasks.js';
+import {
+    displayTasks
+} from './tasks.js';
 
-// DOM
+// DOM elements
 export const userName = document.querySelector('.greeting-item'),
-taskList = document.querySelector('.todo-list'),
-todoCounter = document.querySelector('.todo-title__counter input');
+    taskList = document.querySelector('.todo-list'),
+    todoCounter = document.querySelector('.todo-title__counter input');
 
 // Task DB
 export let todoDB = [];

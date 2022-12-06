@@ -1,15 +1,14 @@
 .todo__success-alert {
     position: absolute;
-    right: 4%;
-    top: 150px;
     display: none;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    right: 8%;
+    top: 150px;
+    color: $white-color;
     background-color: $teal-color;
     border-radius: 10px;
     box-shadow: $shadow-checked;
-    color: $white-color;
     font-size: 1rem;
     font-weight: 700;
     padding: 1rem;
@@ -20,16 +19,15 @@
 .todo__copy-alert,
 .todo__warning-alert {
     position: absolute;
-    right: 4%;
-    top: 150px;
     display: none;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    right: 8%;
+    top: 150px;
+    color: $white-color;
     background-color: $alert-color;
     border-radius: 10px;
     box-shadow: $shadow-alert;
-    color: $white-color;
     font-size: 1rem;
     font-weight: 700;
     padding: 1rem;

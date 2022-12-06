@@ -1,8 +1,15 @@
-import {todoDB} from './app.js';
-import {successAlert, displayTasks} from './tasks.js';
+import {
+    todoDB
+} from './app.js';
+import {
+    successAlert,
+    displayTasks
+} from './tasks.js';
 
-const clearAll = document.querySelector('.todo-title__clear img');
+// DOM elements
+const clearAllImg = document.querySelector('.todo-title__clear img');
 
+// Display clear all button
 function displayClearButton() {
     if (todoDB.length > 1) {
         document.querySelector('.todo-title__clear').style.display = 'flex';
@@ -25,13 +32,14 @@ function deleteTask(id, db) {
 
 // Delete all tasks
 
-function deleteAllTasks() {
-    todoDB.splice(0, todoDB.length);
+function deleteAllTasks(db) {
+    db.splice(0, db.length);
 }
 
-clearAll.addEventListener('click', () => {
+clearAllImg.addEventListener('click', () => {
 
-    deleteAllTasks();
+    deleteAllTasks(todoDB);
+
     successAlert.classList.add('display-flex');
     setTimeout(function () {
         successAlert.classList.remove('display-flex');
@@ -41,4 +49,7 @@ clearAll.addEventListener('click', () => {
     displayTasks(todoDB);
 });
 
-export {deleteTask, displayClearButton};
+export {
+    deleteTask,
+    displayClearButton
+};

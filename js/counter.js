@@ -1,8 +1,4 @@
-import {todoDB,todoCounter } from './app.js';
-
-// Todo counter
-function taskCounter() {
-    todoCounter.value = todoDB.length;
+// Todo counter funciton
+export function taskCounter(item, db) {
+    item.value = db.length;
 }
-
-export {taskCounter};

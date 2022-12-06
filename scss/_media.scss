@@ -3,10 +3,8 @@
         .todo {
             &-header {
                 .greeting {
-                    &-header {
-                        font-size: 1.6rem;
-                    }
 
+                    &-header,
                     &-item {
                         font-size: 1.6rem;
                     }
@@ -45,8 +43,8 @@
 
             &-list {
                 &__empty {
-                    margin-top: 80px;
                     font-size: 7rem;
+                    margin-top: 80px;
                 }
             }
         }
@@ -57,10 +55,7 @@
     .app {
         .todo {
 
-            .todo__success-alert {
-                top: 220px;
-            }
-
+            .todo__success-alert,
             .todo__copy-alert,
             .todo__warning-alert {
                 top: 220px;
@@ -74,10 +69,7 @@
                 .greeting {
                     justify-content: center;
 
-                    &-header {
-                        font-size: 1.3rem;
-                    }
-
+                    &-header,
                     &-item {
                         font-size: 1.3rem;
                     }
@@ -111,9 +103,9 @@
                 }
 
                 &__clear {
-                    margin-right: 15px;
+                    width: 96px;
                     font-size: 0.8rem;
-                    width: 6rem;
+                    margin-right: 15px;
                 }
 
                 &__counter {
@@ -129,8 +121,8 @@
                 flex-direction: column;
 
                 &__empty {
-                    margin-top: 60px;
                     font-size: 6rem;
+                    margin-top: 60px;
                 }
 
                 &__item {
@@ -140,7 +132,7 @@
                     }
 
                     &:nth-child(-n+2) {
-                        margin-top: 1.5rem;
+                        margin-top: 24px;
                     }
 
                     &:first-child {
@@ -170,8 +162,8 @@
                     }
 
                     &-item {
-                        font-size: 1.2rem;
                         width: 100%;
+                        font-size: 1.2rem;
                         text-align: center;
                     }
                 }
@@ -191,6 +183,7 @@
 
             &-title {
                 margin-top: 50px;
+
                 &__right {
                     flex-direction: column;
                 }
@@ -215,9 +208,10 @@
 
             &-list {
                 &__empty {
-                    margin-top: 30px;
                     font-size: 3rem;
+                    margin-top: 30px;
                 }
+
                 &__item {
 
                     &:nth-child(-n+2) {

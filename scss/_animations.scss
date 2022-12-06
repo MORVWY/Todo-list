@@ -32,8 +32,8 @@
 }
 
 .scale-out-center {
-  -webkit-animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: scale-out-center .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: scale-out-center .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @-webkit-keyframes scale-out-center {
@@ -71,7 +71,6 @@
 .complete {
   text-decoration: line-through;
   opacity: .5;
-
 }
 
 @keyframes rotation {

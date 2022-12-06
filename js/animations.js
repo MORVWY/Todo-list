@@ -1,4 +1,6 @@
-import {addTaskButton} from './tasks.js';
+import {
+    addTaskButton
+} from './tasks.js';
 
 // Rotate animation
 function rotateAnimationAdd() {
@@ -11,4 +13,6 @@ function rotateAnimationRemove() {
 
 addTaskButton.addEventListener("animationend", rotateAnimationRemove, false);
 
-export {rotateAnimationAdd};
+export {
+    rotateAnimationAdd
+};
