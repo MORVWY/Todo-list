@@ -24,7 +24,15 @@ const copyAlert = document.querySelector('.todo__copy-alert'),
     successAlert = document.querySelector('.todo__success-alert');
 
 // Add task section
-addTaskButton.addEventListener('click', () => {
+addTaskButton.addEventListener('click', tasksSetup);
+
+addTaskForm.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        tasksSetup();
+    }
+});
+
+function tasksSetup() {
     let addTaskValue = addTaskForm.value;
 
     if (addTaskValue.trim() == '') {
@@ -51,7 +59,7 @@ addTaskButton.addEventListener('click', () => {
 
         taskFormValueChanges(addTaskForm);
     }
-});
+}
 
 // List message
 function emptyTaskListMessage(db, item) {
